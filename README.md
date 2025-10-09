@@ -104,26 +104,3 @@ codepet/
 │   └── system_utils.py
 ├── requirements.txt
 └── README.md
-
-
-
-```mermaid
-graph TD
-    A[用户在客户端输入问题] --> B{问题向量化};
-    B --> C[使用问题向量在ChromaDB中进行语义相似度检索];
-    C --> D[召回Top-K个最相关的文本块];
-    D --> E{构建提示词(Prompt)}; %% <-- 重点：E的定义在这里结束，并换行
-
-    subgraph "提示词模板"
-        direction LR
-        E1[检索到的文本块作为上下文] --> E;
-        E2[用户的原始问题] --> E;
-    end
-    
-    E --> F[调用大语言模型 (LLM) API];
-    F --> G[LLM基于上下文生成回答];
-    G --> H[将回答和来源信息返回给客户端];
-
-    classDef process fill:#eaf2f8,stroke:#3498db,stroke-width:2px;
-    class A,B,C,D,E,F,G,H process;
-```
